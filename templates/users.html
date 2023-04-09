@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Add - Remove User{% endblock %}
+
+{% block content %}
+
+  <div class="login-box">
+    <h2>Add User</h2>
+    <form method="post" action="{{ url_for('adduser') }}" class="addForms">
+      <div class="user-box">
+        <input type="text" id="username" name="username">
+        <label for="username">Username:</label>
+      </div>
+      <div class="user-box">
+        <input type="text" id="password" name="password">
+        <label for="password">Password:</label>
+      </div>
+      <div class="user-box">
+
+        <label >is Admin</label><br><br><br>
+      </div>
+      <div class="user-box">
+        <input type="radio" id="evet"  name="isAdmin" value=true>
+        <label for = "evet">True </label>
+      </div>  
+      <div class="user-box">       
+        <input type="radio" id="hayir" name="isAdmin" value=false>
+        <label for = "hayir">False </label>
+      <div class="user-box">
+          
+      <a>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <button type="submit">Submit</button>
+        
+      </a>
+    </form>
+  </div>
+
+  <hr/>
+  {% for user in users %}
+            <article     style="border: 1px solid black; width: auto; float: left;padding: 25px;" >
+              <div class="text">
+
+                <h3><b>Username:</b>{{ user.username }}</h3>
+                <p><b>is Admin:</b>{{ user.isAdmin }}</p>                               
+
+                <form method="post" action="{{ url_for('deleteUser') }}">
+                  <input type="hidden" name="user_id" value="{{ user._id }}">
+                  <button type="submit">Delete</button>
+                </form>
+              </div>
+            </article>      
+        {% endfor %}
+{% endblock %}
