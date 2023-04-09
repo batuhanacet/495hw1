@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Monitor{% endblock %}
+
+{% block content %}
+  
+<div class="login-box">
+  <h2>Add Monitor</h2>
+  <form method="post" action="{{ url_for('submit_monitorForm') }}" class="addForms">
+    <div class="user-box">
+      <input type="text" id="name" name="name">
+      <label for="name">Name:</label>
+    </div>
+    <div class="user-box">
+      <input type="text" id="description" name="description">
+      <label for="description">Description:</label>
+    </div>
+
+    <div class="user-box">
+
+      <input type="number" id="price" name="price">
+      <label for="price">Price:</label>
+    </div>
+    <div class="user-box">
+      <input type="text" id="seller" name="seller">
+      <label for="seller">Seller:</label>
+    </div>
+    <div class="user-box">
+      <input type="text" id="image" name="image">
+      <label for="image">Image hyperlink:</label>
+    </div>
+    <div class="user-box">
+
+      <input type="text" id="spec" name="spec">
+      <label for="spec">Spec:</label>
+
+    </div>    
+    <a>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <button type="submit">Submit</button>
+      
+    </a>
+  </form>
+</div>
+
+{% endblock %}

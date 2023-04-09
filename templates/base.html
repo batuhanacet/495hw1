@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>Ceng495 hw1 E-commerce application e2399111</h1>
+      <nav id="topnav">
+        <ul>
+          <li><a href="/">Home</a></li>         
+          {% if isAdmin == true %}
+          <li><a href="/clothForm">Add Cloth</a></li>
+          <li><a href="/computerForm">Add Computer</a></li>
+          <li><a href="/monitorForm">Add Monitor</a></li>
+          <li><a href="/snackForm">Add Snack</a></li>
+          <li><a href="/users">Add and Remove Users</a></li>
+          {% endif %}
+          {% if loggedIn %}
+          <li><a href="/logout">Logout</a></li>
+          {% else %}
+          <li><a href="/loginPage">Login</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      &copy; 2023 Mustafa Batuhan Acet 2399111 batuhan.acet@metu.edu.tr
+    </footer>
+  </body>
+</html>

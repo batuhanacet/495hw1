@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}HomeScreen{% endblock %}
+{% block content %}
+<br/>
+  <h1>Homepage - Listing products</h1>
+  
+    <div class="container">
+      <form method="get">
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+          <option value="">All</option>
+          <option value="cloth">Clothing</option>
+          <option value="computer">Computer Components</option>
+          <option value="monitor">Monitor</option>
+          <option value="snack">Snacks</option>
+        </select>
+        <button type="submit">Filter</button>
+      </form>
+      <main class="grid">
+        {% for item in products %}
+            <article>
+              <img src={{ item.image }} alt="">
+              <div class="text">
+                <h3>{{ item.name }}</h3>
+                <p>by <a>{{ item.seller }}</a></p>
+                <p>{{ item.description }}</p>
+
+                {% if item.size is defined %}
+                <p> Size : {{ item.size }} | Colour: {{ item.colour }}</p>                
+                {% endif %}
+                {% if item.spec is defined %}
+                <p> Spec : {{ item.spec }} </p>                
+                {% endif %}
+
+                <p>{{ item.price }} TL</p>
+
+
+                <a href="{{ url_for('item', item_id=item._id) }}">View Product</a>
+
+
+                <form method="post" action="{{ url_for('deleteProduct') }}">
+                  <input type="hidden" name="item_id" value="{{ item._id }}">
+                  {% if isAdmin %}
+                  <button type="submit">Delete</button>
+                  {% endif %}
+                </form>
+              </div>
+            </article>      
+        {% endfor %}
+      </main>
+    </div>
+  
+  
+{% endblock %}

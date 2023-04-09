@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="grid">
+<article>
+    <img src={{ item.image }} alt="">
+    <div class="text">
+      <h3>{{ item.name }}</h3>
+      <p>by <a>{{ item.seller }}</a></p>
+      <p>{{ item.description }}</p>
+
+      {% if item.size is defined %}
+      <p> Size : {{ item.size }} | Colour: {{ item.colour }}</p>                
+      {% endif %}
+      {% if item.spec is defined %}
+      <p> Spec : {{ item.spec }} </p>                
+      {% endif %}
+
+      <p>{{ item.price }} TL</p>
+     
+      <form method="post" action="{{ url_for('deleteProduct') }}">
+        <input type="hidden" name="item_id" value="{{ item._id }}">
+        {% if isAdmin %}
+        <button type="submit">Delete</button>
+        {% endif %}
+      </form>
+    </div>
+  </article>
+</main>
+
+{% for i in reviews %}
+
+Rating: {{ i.rating }} <br>
+Review:  {{ i.review }}
+
+{% endfor %}
+  {% if loggedIn %}
+  <form method="post" action="{{ url_for('addComment') }}">
+    <input type="hidden" name="item_id" value="{{ item._id }}">
+    <div>
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5">
+    </div>
+    <div>
+      <label for="review">Review:</label>
+      <input type="textarea" id="review" name="review">
+    </div>
+    <button type="submit">Comment</button>
+  </form>
+  {% endif %}
+{% endblock %}
