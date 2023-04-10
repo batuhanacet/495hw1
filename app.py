@@ -76,6 +76,19 @@ def adduser():
 
     return redirect(url_for('users'))
 
+@app.route('/profile')
+@login_required
+def profile():
+    if current_user.is_authenticated:    
+        loggedIn = True
+        isAdmin= current_user.isAdmin
+        name = current_user.username    
+    else:
+        loggedIn = False
+        isAdmin = False
+    reviews = db.reviews.find({'user_id':ObjectId(current_user.id)})
+
+    return render_template('profile.html',reviews=reviews,name=name,loggedIn = loggedIn, isAdmin = isAdmin)
 
 
 
@@ -88,9 +101,9 @@ def addComment():
     if current_user.is_authenticated: 
         user_id = current_user.id
 
-        existing_review = db.reviews.find_one({'user_id': ObjectId(user_id), 'product_id': ObjectId(product_id)})
+        existingReview = db.reviews.find_one({'user_id': ObjectId(user_id), 'product_id': ObjectId(product_id)})
 
-        if existing_review:
+        if existingReview:
             db.reviews.update_one(
                             {'user_id': ObjectId(user_id), 'product_id': ObjectId(product_id)},
                             {'$set': {'rating': rating, 'review': review}})
