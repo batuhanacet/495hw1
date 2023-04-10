@@ -27,11 +27,12 @@
     </div>
   </article>
 </main>
-
+<h2> Comments </h2>
 {% for i in reviews %}
 
 Rating: {{ i.rating }} <br>
-Review:  {{ i.review }}
+Review:  {{ i.review }} <br><hr>
+
 
 {% endfor %}
   {% if loggedIn %}
