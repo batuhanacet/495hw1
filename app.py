@@ -8,12 +8,11 @@ app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
 client = MongoClient("mongodb+srv://batuhanacet:ceng495hw1@cluster0.mzzdi07.mongodb.net/?retryWrites=true&w=majority")
+
 db = client.gettingStarted
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-
 
 #login logout routes
 
@@ -101,14 +100,13 @@ def addComment():
     if current_user.is_authenticated: 
         user_id = current_user.id
 
-        existingReview = db.reviews.find_one({'user_id': ObjectId(user_id), 'product_id': ObjectId(product_id)})
+        existingReview = db.reviews.find_one({'user_id': ObjectId(user_id), 'product_id': ObjectId(product_id)}) 
 
         if existingReview:
             db.reviews.update_one(
-                            {'user_id': ObjectId(user_id), 'product_id': ObjectId(product_id)},
+                            {'user_id': ObjectId(user_id), 'product_id': ObjectId(product_id)}, 
                             {'$set': {'rating': rating, 'review': review}})
         else:
-
             db.reviews.insert_one({
                             'user_id': ObjectId(user_id), 
                             'product_id': ObjectId(product_id),
@@ -119,8 +117,6 @@ def addComment():
 
 
 #render html templates
-
-
 
 @app.route('/item/<item_id>')
 def item(item_id):

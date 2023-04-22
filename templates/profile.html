@@ -6,8 +6,8 @@
     <p><strong>is Admin:</strong> {{ isAdmin }}</p>
 
     {% for review in reviews %}
-    <p><strong>User Ratings:</strong> {{ review.rating }}</p>
-    <p><strong>User Reviews:</strong> {{ review.review }}</p>
+    <p><strong>Given Rating:</strong> {{ review.rating }}</p>
+    <p><strong>Given Review:</strong> {{ review.review }}</p>
     <hr>
     {% endfor %}
 {% endblock %}

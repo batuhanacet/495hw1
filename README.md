@@ -1,11 +1,20 @@
 # 495hw1
 
 https://ceng495hw1webservice.onrender.com/
+
 username : batuhan
 password : acet
+isAdmin : True
 
-This is an Flask Application connected mongodb with pymongo.
+username : yetkisizbatuhan
+password : acet
+isAdmin : false
 
+username : user
+password : user
+isAdmin : false
+
+This application is a Flask Application connected MongoDB with pymongo. I choose Flask because the connection to MongoDB is a very simple one-line code. Also, Flask uses Jinja templates, which provide easily manipulated HTML files. 
 
 i have 3 collection in 1 db,
 
@@ -34,18 +43,18 @@ product_id:
 rating:
 review:
 
-In application, Only visible Home and Login first. If user not logged in only see products detail and their pages. 
+In the application, only the homepage and Login tabs are visible. If the users are not logged in, they only see products detail and their pages. 
 
-If admin user login, delete button visible in product card in homepage, also see different add button on navbar. They provide add products or user.
-Admin can delete users in add remove users tab.
+After the admin user login, the delete button is visible in the product card on the homepage. Also, see the different add buttons on the navbar. These buttons allow adding products or users.
+Admin can delete users in the "Add and Remove Users" tab.
 
-if normal user login, cannot add or remove any user but can write comment in product pages.
+If the standard user login, the user cannot add or remove any user but can write a comment on product pages. Also cannot remove any product.
 
-i handle this authentication methods with flask_login module.
+I handle this authentication method with the flask_login module.
 
-in homepage we have a little filter button that filters products according to selected category filter.
+On the homepage, a small filter button filters products according to the selected category filter.
 
-after logged in profil button appear on navbar, user can see own ratings and reviews.
+After logging in, the profile button appears on the navbar, and users can see their ratings and reviews on their profile page.
 
 
 
