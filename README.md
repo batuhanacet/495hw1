@@ -54,7 +54,10 @@ I handle this authentication method with the flask_login module.
 
 On the homepage, a small filter button filters products according to the selected category filter.
 
-After logging in, the profile button appears on the navbar, and users can see their ratings and reviews on their profile page.
+After logging in, the profile button appears on the navbar, and users can see their ratings,average rating and reviews on their profile page.
+
+Delete user and delete product also deletes user's all reviews.
+
 
 
 

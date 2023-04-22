@@ -81,13 +81,20 @@ def profile():
     if current_user.is_authenticated:    
         loggedIn = True
         isAdmin= current_user.isAdmin
-        name = current_user.username    
+        name = current_user.username  
+
+        rs = db.reviews.find({'user_id': current_user.id})
+
+        totalRating = sum(r['rating'] for r in rs)
+        numReviews = db.reviews.count_documents({'user_id': current_user.id})
+        avg_rating = round(totalRating / numReviews, 2) if numReviews > 0 else 0
+
     else:
         loggedIn = False
         isAdmin = False
     reviews = db.reviews.find({'user_id':ObjectId(current_user.id)})
 
-    return render_template('profile.html',reviews=reviews,name=name,loggedIn = loggedIn, isAdmin = isAdmin)
+    return render_template('profile.html',reviews=reviews,name=name,loggedIn = loggedIn, isAdmin = isAdmin, avg_rating = avg_rating)
 
 
 
@@ -210,13 +217,17 @@ def users():
 
 @app.route('/deleteUser', methods=['POST'])
 def deleteUser():
-    user_id = request.form['user_id']
+    user_id = request.form['user_id']    
+
+    db.reviews.delete_many({'user_id':  ObjectId(user_id)})
     db.users.delete_one({'_id': ObjectId(user_id)})
+
     return redirect(url_for('users'))
 
 @app.route('/delete', methods=['POST'])
 def deleteProduct():
     item_id = request.form['item_id']
+    db.reviews.delete_many({'product_id':  ObjectId(item_id)})
     db.products.delete_one({'_id': ObjectId(item_id)})
     return redirect(url_for('home'))
 
